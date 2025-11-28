@@ -71,6 +71,14 @@ As seguintes consultas foram desenvolvidas e estão presentes no arquivo `.sql`:
 
 ---
 
+## 🎙️Apresentação (Parte 4)
+- Tema do Banco de Dados;
+- DER e as tabelas criadas;
+- Uma/Duas consultas demonstradas no MySQL;
+- As principais difuldades e aprendizados.
+
+---
+
 ## 🧑‍💻 Autor
 
 Este projeto foi desenvolvido por:
