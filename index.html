@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação Final - Banco de Dados</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: "▶";
+            font-size: 0.8em;
+        }
+
+        .tema-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .tema-box h3 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .tema-box p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .der-container {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px dashed #667eea;
+        }
+
+        .der-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .der-placeholder {
+            background: white;
+            padding: 0.5px 20px;
+            border-radius: 10px;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+
+        .code-block code {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        code {
+            font-family: monospace;
+            background-color: #2d2d2d;
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: #f8f8f2;
+        }
+
+        .list-section {
+            display: grid;
+            gap: 20px;
+        }
+
+        .list-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .list-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .list-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .list-item p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        .badge.difficulty {
+            background: #e74c3c;
+        }
+
+        .badge.learning {
+            background: #27ae60;
+        }
+
+        .badge.cardinality {
+            background: #3498db;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .info-card strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .cardinality-box {
+            background: linear-gradient(135deg, #e8f4f8 0%, #b8e0f0 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            margin-bottom: 20px;
+        }
+
+        .cardinality-box h4 {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cardinality-box h4::before {
+            content: "🔗";
+        }
+
+        .cardinality-table {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .cardinality-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .cardinality-table th {
+            background: #3498db;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .cardinality-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ecf0f1;
+            color: #555;
+        }
+
+        .cardinality-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cardinality-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .concept-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .concept-box strong {
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .cardinality-table {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Trabalho Final de Banco de Dados</h1>
+            <p>Sistema de Gerenciamento de Biblioteca</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Colégio Técnico da UFMG | Profª Drª Lianny Sanchez</p>
+        </div>
+
+        <div class="content">
+            <!-- Seção 1: Tema -->
+            <div class="section">
+                <h2 class="section-title">1. Tema do Banco de Dados</h2>
+                <div class="tema-box">
+                    <h3>🗃️ Sistema de Gerenciamento de uma Biblioteca</h3>
+                    <p>
+                        Um banco de dados projetado para gerenciar o acervo literário de uma biblioteca, 
+                        incluindo informações sobre autores, editoras, livros, usuários e empréstimos. 
+                        O sistema permite o controle eficiente de todo o ciclo de vida dos livros, desde 
+                        o cadastro até a devolução de empréstimos.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Seção 2: DER e Tabelas -->
+            <div class="section">
+                <h2 class="section-title">2. DER e Tabelas Criadas</h2>
+                
+                <div class="der-container">
+                    <div class="der-placeholder">
+                        <h3>📊 Diagrama Entidade-Relacionamento</h3>
+                        <p style="font-size: 0.9em; margin-top: 10px; color: #888;">
+                            <img src="https://github.com/vinyaro/sistema-de-biblioteca-mysql/blob/main/Modelo-DER.png?raw=true" alt="Diagrama Entidade-Relacionamento" style="width: 100%; height: auto;">
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <strong>📖 AUTOR</strong>
+                        <p>ID_Autor, Nome, Nacionalidade, DataNascimento</p>
+                    </div>
+                    <div class="info-card">
+                        <strong>🏢 EDITORA</strong>
+                        <p>ID_Editora, Nome, Cidade, Telefone</p>
+                    </div>
+                    <div class="info-card">
+                        <strong>📚 LIVRO</strong>
+                        <p>ISBN, Título, AnoPublicacao, FK_Editora</p>
+                    </div>
+                    <div class="info-card">
+                        <strong>👤 USUARIO</strong>
+                        <p>Matricula, Nome, Email, Telefone, Endereco</p>
+                    </div>
+                    <div class="info-card">
+                        <strong>📋 EMPRESTIMO</strong>
+                        <p>ID_Emprestimo, FK_ISBN, FK_Matricula, DataEmprestimo, DataDevolucaoPrevista</p>
+                    </div>
+                    <div class="info-card">
+                        <strong>✍️ LIVRO_AUTOR</strong>
+                        <p>FKK_ISBN, FK_ID_Autor</p>
+                    </div>
+                </div>
+
+                <!-- Nova Seção: Cardinalidade -->
+                <div style="margin-top: 40px;">
+                    <h3 style="color: #3498db; font-size: 1.5em; margin-bottom: 20px;">
+                        🔗 Análise de Cardinalidade e Relacionamentos
+                    </h3>
+
+                    <div class="concept-box">
+                        <strong>Conceito:</strong> A cardinalidade define o número de instâncias (linhas) de uma entidade 
+                        que podem estar associadas a instâncias (linhas) de outra entidade. Os principais tipos são:
+                        <strong>1:1</strong> (Um para Um), <strong>1:N</strong> (Um para Muitos) e 
+                        <strong>N:M</strong> (Muitos para Muitos).
+                    </div>
+
+                    <!-- Relacionamento 1: EDITORA e LIVRO -->
+                    <div class="cardinality-box">
+                        <h4>EDITORA ← → LIVRO</h4>
+                        <p style="margin-bottom: 15px;">
+                            <span class="badge cardinality">1:N</span>
+                            <strong>Um-para-Muitos</strong>
+                        </p>
+                        
+                        <div class="cardinality-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Entidade/Tabela</th>
+                                        <th>Papel</th>
+                                        <th>Chave</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>EDITORA</strong></td>
+                                        <td>Lado "Um" (1)</td>
+                                        <td>ID_Editora (PK)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>LIVRO</strong></td>
+                                        <td>Lado "Muitos" (N)</td>
+                                        <td>FK_Editora (FK)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <p style="color: #555; line-height: 1.6;">
+                            <strong>Regra:</strong> Uma EDITORA (ex: Círculo de Rimas) pode publicar MUITOS LIVROS, 
+                            mas um LIVRO é publicado por APENAS UMA EDITORA. A chave estrangeira <code>FK_Editora</code> na 
+                            tabela LIVRO aponta para a chave primária <code>ID_Editora</code> da tabela EDITORA.
+                        </p>
+                    </div>
+
+                    <!-- Relacionamento 2: LIVRO e AUTOR -->
+                    <div class="cardinality-box">
+                        <h4>LIVRO ← → AUTOR</h4>
+                        <p style="margin-bottom: 15px;">
+                            <span class="badge cardinality">N:M</span>
+                            <strong>Muitos-para-Muitos</strong>
+                        </p>
+                        
+                        <div class="cardinality-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Entidade/Tabela</th>
+                                        <th>Tipo de Relação</th>
+                                        <th>Chave</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>LIVRO</strong></td>
+                                        <td>Lado "Muitos" (N)</td>
+                                        <td>ISBN (PK)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>AUTOR</strong></td>
+                                        <td>Lado "Muitos" (M)</td>
+                                        <td>ID_Autor (PK)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>LIVRO_AUTOR</strong></td>
+                                        <td>Tabela Associativa</td>
+                                        <td>Chave Composta (FKK_ISBN, FK_ID_Autor)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <p style="color: #555; line-height: 1.6;">
+                            <strong>Regra:</strong> Um LIVRO pode ter MÚLTIPLOS AUTORES (ex: "Obra Poética" escrita 
+                            por Fernando Pessoa e Mário de Andrade), e um AUTOR pode ter escrito MÚLTIPLOS LIVROS. 
+                            O relacionamento N:M é resolvido através da tabela associativa LIVRO_AUTOR, cuja chave 
+                            primária é composta pelas duas chaves estrangeiras <code>FKK_ISBN</code> e <code>FK_ID_Autor</code>.
+                        </p>
+                    </div>
+
+                    <!-- Relacionamento 3: USUARIO e LIVRO -->
+                    <div class="cardinality-box">
+                        <h4>USUARIO ← → LIVRO (via EMPRESTIMO)</h4>
+                        <p style="margin-bottom: 15px;">
+                            <span class="badge cardinality">N:M</span>
+                            <strong>Muitos-para-Muitos</strong>
+                        </p>
+                        
+                        <div class="cardinality-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Entidade/Tabela</th>
+                                        <th>Tipo de Relação</th>
+                                        <th>Chave</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>USUARIO</strong></td>
+                                        <td>Lado "Muitos" (N)</td>
+                                        <td>Matricula (PK)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>LIVRO</strong></td>
+                                        <td>Lado "Muitos" (M)</td>
+                                        <td>ISBN (PK)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>EMPRESTIMO</strong></td>
+                                        <td>Tabela de Transação</td>
+                                        <td>ID_Emprestimo (PK)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <p style="color: #555; line-height: 1.6;">
+                            <strong>Regra:</strong> Um USUÁRIO pode registrar MÚLTIPLOS EMPRÉSTIMOS, e um LIVRO 
+                            pode estar associado a MÚLTIPLOS EMPRÉSTIMOS ao longo do tempo. A tabela EMPRESTIMO 
+                            resolve o N:M e armazena atributos próprios do relacionamento (metadados da transação), 
+                            como <code>DataEmprestimo</code> e <code>DataDevolucaoPrevista</code>. Ela se conecta através das chaves estrangeiras 
+                            <code>FK_Matricula</code> e <code>FK_ISBN</code>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 3: Consultas SQL -->
+            <div class="section">
+                <h2 class="section-title">3. Consultas Demonstradas no MySQL</h2>
+                
+                <div class="list-item">
+                    <h4>Consulta Principal: Listagem Completa de Livros</h4>
+                    <div class="code-block">
+                        <code>SELECT * FROM LIVRO;</code>
+                    </div>
+                    <p>Esta consulta retorna todos os registros da tabela LIVRO, exibindo o acervo completo da biblioteca com todas as informações cadastradas (ISBN, título, ano de publicação e editora).</p>
+                </div>
+            </div>
+
+            <!-- Seção 4: Dificuldades e Aprendizados -->
+            <div class="section">
+                <h2 class="section-title">4. Dificuldades e Aprendizados</h2>
+                
+                <div class="list-section">
+                    <div class="list-item">
+                        <span class="badge difficulty">Dificuldade</span>
+                        <h4>Memorização da Sintaxe SQL</h4>
+                        <p>
+                            A memorização da sintaxe do MySQL apresentou desafios, especialmente quando as 
+                            consultas eram mais rebuscadas e demandavam maior raciocínio lógico para estruturar 
+                            corretamente as cláusulas e operadores.
+                        </p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="badge difficulty">Dificuldade</span>
+                        <h4>Aprendizado do Workbench 8.0</h4>
+                        <p>
+                            Aprender a utilizar o SGBD Workbench 8.0 em tempo hábil foi desafiador, 
+                            considerando todas as suas funcionalidades e particularidades da interface 
+                            de gerenciamento de banco de dados.
+                        </p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="badge difficulty">Dificuldade</span>
+                        <h4>Modelagem Conceitual e Relacionamentos</h4>
+                        <p>
+                            Construir e compreender as relações de entidade e relacionamento durante a 
+                            modelagem conceitual representou um desafio significativo, principalmente quando 
+                            as chaves eram compostas e os relacionamentos mais complexos.
+                        </p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="badge learning">Aprendizado</span>
+                        <h4>Importância de Bancos de Dados Estruturados</h4>
+                        <p>
+                            Compreendi a essencialidade de um banco de dados estruturado mantido por relações 
+                            bem definidas entre os campos, garantindo integridade e consistência dos dados.
+                        </p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="badge learning">Aprendizado</span>
+                        <h4>DDL e DML para Desenvolvimento Web</h4>
+                        <p>
+                            As linguagens DDL (Data Definition Language) e DML (Data Manipulation Language) se mostraram essenciais para compreender 
+                            e desenvolver melhor aplicações web, sendo fundamentais no processo de criação e 
+                            gerenciamento de estruturas de dados.
+                            Lembrando que a linguagem DDL é usada para definir a estrutura do banco de dados (ex: <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>), 
+                            enquanto a DML é usada para manipular os dados (ex: <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) do banco de dados. 
+                        </p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="badge learning">Aprendizado</span>
+                        <h4>Uso Crítico de Ferramentas e Inclusão</h4>
+                        <p>
+                            O curso de banco de dados foi essencial ao ensinar sobre como devemos utilizar 
+                            criticamente as ferramentas e os suportes necessários àqueles que têm dificuldade 
+                            de aprender novas tecnologias ou apresentam dificuldades de aprendizagem que podem 
+                            estar relacionadas a transtornos de neurodesenvolvimento.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong> @vinyaro </strong></p>
+            <p style="margin-top: 10px;">Trabalho Final - Banco de Dados</p>
+        </div>
+    </div>
+</body>
+</html>
